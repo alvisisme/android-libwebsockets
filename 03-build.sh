@@ -1,68 +1,18 @@
 #!/bin/bash
 
-#
-# Build libwebsockets static library for Android
-#
-# requires debian package xutils-dev for makedepend (openssl make depend)
-#
-
-# This is based on http://stackoverflow.com/questions/11929773/compiling-the-latest-openssl-for-android/
-# via https://github.com/warmcat/libwebsockets/pull/502
-
+# 当一个命令执行失败时，shell会立即退出
+set -e
 # path to NDK
 export NDK=/opt/android-ndk
-
-set -e
-
-# Download packages libz, openssl, libuv and libwebsockets
-
-[ ! -f zlib-1.2.8.tar.gz ] && {
-wget http://prdownloads.sourceforge.net/libpng/zlib-1.2.8.tar.gz
-}
-
-[ ! -f openssl-1.0.2g.tar.gz ] && {
-wget https://openssl.org/source/openssl-1.0.2g.tar.gz
-}
-
-[ ! -f libuv.tar.gz ] && {
-git clone https://github.com/libuv/libuv.git
-tar caf libuv.tar.gz libuv
-}
-
-[ ! -f gyp.tar.gz ] && {
-git clone https://github.com/bnoordhuis/gyp.git
-tar caf gyp.tar.gz gyp
-} 
-
-[ ! -f libwebsockets.tar.gz ] && {
-git clone https://github.com/warmcat/libwebsockets.git
-tar caf libwebsockets.tar.gz libwebsockets
-}
-
-# Clean then Unzip
-
-[ -d zlib-1.2.8 ] && rm -fr zlib-1.2.8
-[ -d openssl-1.0.2g ] && rm -fr openssl-1.0.2g
-[ -d libwebsockets ] && rm -fr libwebsockets
-[ -d libuv ] && rm -fr libuv
-[ -d gyp ] && rm -fr gyp
-[ -d android-toolchain-aarch64 ] && rm -fr android-toolchain-aarch64
-tar xf zlib-1.2.8.tar.gz
-tar xf openssl-1.0.2g.tar.gz
-tar xf libuv.tar.gz
-mkdir -p libuv/build
-mkdir -p libuv/out
-tar xf gyp.tar.gz -C libuv/build
-tar xf libwebsockets.tar.gz
-
-# create a local android toolchain
+ # create a local android toolchain
 $NDK/build/tools/make-standalone-toolchain.sh \
- --arch=arm64 \
- --platform=android-21 \
- --toolchain=aarch64-linux-android-4.9 \
- --install-dir=`pwd`/android-toolchain-aarch64
+  --force \
+  --arch=arm64 \
+  --platform=android-21 \
+  --toolchain=aarch64-linux-android-4.9 \
+  --install-dir=`pwd`/android-toolchain-aarch64
 
-# setup environment to use the gcc/ld from the android toolchain
+ # setup environment to use the gcc/ld from the android toolchain
 export TOOLCHAIN_PATH=`pwd`/android-toolchain-aarch64/bin
 export TOOL=aarch64-linux-android
 export NDK_TOOLCHAIN_BASENAME=${TOOLCHAIN_PATH}/${TOOL}
@@ -96,7 +46,7 @@ echo 'build zlib done'
 
 echo 'build openssl'
 # configure and build openssl
-[ ! -f ./android-toolchain-aarch64/lib/libssl.a ] && {
+{
 PREFIX=$TOOLCHAIN_PATH/..
 cd openssl-1.0.2g
 ./Configure android --prefix=${PREFIX} no-shared no-idea no-mdc2 no-rc5 no-zlib no-zlib-dynamic enable-tlsext no-ssl2 no-ssl3 enable-ec enable-ecdh enable-ecp
@@ -135,10 +85,11 @@ PATH=$TOOLCHAIN_PATH:$PATH cmake \
   -DLWS_WITHOUT_TESTAPPS=ON \
   -DLWS_IPV6=OFF \
   -DLWS_USE_BUNDLED_ZLIB=OFF \
-  -DLWS_WITH_SSL=OFF  \
+  -DLWS_WITH_SSL=ON \
   -DLWS_WITH_HTTP2=ON \
   -DLWS_WITH_LIBUV=ON \
   -DLWS_WITH_PLUGINS=ON \
+  -DLWS_WITH_LWSWS=ON \
   -DLWS_OPENSSL_LIBRARIES="$TOOLCHAIN_PATH/../lib/libssl.a;$TOOLCHAIN_PATH/../lib/libcrypto.a" \
   -DLWS_OPENSSL_INCLUDE_DIRS=$TOOLCHAIN_PATH/../include \
   -DLWS_LIBUV_LIBRARIES="${TOOLCHAIN_PATH}/../../libuv/out/Debug/libuv.a" \

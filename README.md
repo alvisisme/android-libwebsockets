@@ -12,8 +12,11 @@
 
 1. 修改编译脚本，指定ndk所在路径。
 
-1. 执行编译脚本。
-  sh android-make-script.sh
+1. 按照编号执行编译脚本。
+
+  sh 01-download.sh
+  sh 02-prebuild.sh
+  sh 03-build.sh
 
 ## Docker镜像
 
