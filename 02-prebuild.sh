@@ -13,5 +13,4 @@ mkdir -p libuv/build
 mkdir -p libuv/out
 tar xf gyp.tar.gz -C libuv/build
 tar xf libwebsockets.tar.gz
-cd libwebsockets && git checkout -b v2.3.0 v2.3.0
 
