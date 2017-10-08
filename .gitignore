@@ -4,3 +4,4 @@ openssl-1.0.2g
 libwebsockets
 libuv
 android-toolchain-aarch64
+android-toolchain-arm
