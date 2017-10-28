@@ -7,7 +7,10 @@ export NDK=/opt/android-ndk
 
 [ ! -d libwebsockets ] && {
 git clone https://github.com/warmcat/libwebsockets.git
-cd libwebsockets && git checkout -b v2.3.0 v2.3.0 && cd ..
+cd libwebsockets
+git checkout -b v2.3.0 v2.3.0
+patch -p0 <../CMakeLists.txt.patch
+cd ..
 }
 
 

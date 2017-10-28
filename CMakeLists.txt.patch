@@ -1,0 +1,23 @@
+--- CMakeLists.txt	2017-10-28 15:47:37.000000000 +0800
++++ ../CMakeLists.txt	2017-10-28 15:41:29.000000000 +0800
+@@ -834,13 +834,13 @@
+ 
+ # Set the so version of the lib.
+ # Equivalent to LDFLAGS=-version-info x:x:x
+-if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
+-	foreach(lib ${LWS_LIBRARIES})
+-		set_target_properties(${lib}
+-			PROPERTIES
+-			SOVERSION ${SOVERSION})
+-	endforeach()
+-endif()
++# if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
++# 	foreach(lib ${LWS_LIBRARIES})
++# 		set_target_properties(${lib}
++# 			PROPERTIES
++# 			SOVERSION ${SOVERSION})
++# 	endforeach()
++# endif()
+ 
+ set(LIB_LIST)
+ 
