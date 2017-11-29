@@ -1,6 +1,6 @@
---- CMakeLists.txt	2017-10-28 15:47:37.000000000 +0800
-+++ ../CMakeLists.txt	2017-10-28 15:41:29.000000000 +0800
-@@ -834,13 +834,13 @@
+--- libwebsockets/CMakeLists.txt	2017-11-29 10:34:03.651466806 +0800
++++ CMakeLists.txt	2017-11-29 10:28:05.000000000 +0800
+@@ -942,13 +942,13 @@
  
  # Set the so version of the lib.
  # Equivalent to LDFLAGS=-version-info x:x:x

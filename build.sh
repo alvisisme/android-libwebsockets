@@ -3,13 +3,13 @@
 # 当一个命令执行失败时，shell会立即退出
 set -e
 # path to NDK
-export NDK=/opt/android-ndk
+# export NDK=/opt/android-ndk
 
 [ ! -d libwebsockets ] && {
 git clone https://github.com/warmcat/libwebsockets.git
 cd libwebsockets
-git checkout -b v2.3.0 v2.3.0
-patch -p0 <../CMakeLists.txt.patch
+git checkout -b v2.4.1 v2.4.1
+patch -p0 < ../CMakeLists.txt.patch
 cd ..
 }
 
@@ -88,7 +88,6 @@ PATH=$TOOLCHAIN_PATH:$PATH cmake \
   -DLWS_WITHOUT_TESTAPPS=ON \
   -DLWS_IPV6=OFF \
   -DLWS_WITHOUT_TEST_SERVER=OFF \
-  -DLWS_USE_BUNDLED_ZLIB=OFF \
   -DLWS_WITH_SSL=ON \
   -DLWS_WITH_HTTP2=ON \
   -DLWS_WITH_LIBUV=ON \
