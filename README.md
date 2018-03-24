@@ -1,27 +1,22 @@
 # build libwebsockets for android
 
-编译libwebsockets到Android平台上,arm或者arm64架构。
+编译libwebsockets到Android平台,arm64架构。
 
 ## 编译环境
 
-* Ubuntu16.04 64位
-* android-ndk-r13b
-* libwebsockets v2.4.1
+* Ubuntu 16.04.4 LTS
+* Docker version 17.12.1-ce, build 7390fc6
 
 ## 编译步骤
 
-* 修改**build.sh**设定NDK路径,默认为
+  ```shell
+  make
+  ```
 
-    ```shell
-    export NDK=/opt/android-ndk
-    ```
+## 相关源码和工具
 
-* 执行**build.sh**脚本,根据提示选择编译架构
-
-    ```shell
-    bash build.sh
-    ```
-* 编译后头文件位于 **$ARCH/include**, 静态库位于 **$ARCH/lib**
+* android-ndk-r13b
+* libwebsockets v2.4.1
 
 ## 注意事项
 
@@ -41,6 +36,5 @@
 
 ## 辅助工程
 
-* [zlib for android](https://github.com/alvisisme/android-zlib)
 * [openssl for android](https://github.com/alvisisme/android-openssl)
 * [libuv for android](https://github.com/alvisisme/android-libuv)
