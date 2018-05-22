@@ -16,7 +16,7 @@
 ## 相关源码和工具
 
 * android-ndk-r13b
-* libwebsockets v2.4.1
+* libwebsockets v3.0.0
 
 ## 注意事项
 

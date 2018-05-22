@@ -1,6 +1,8 @@
---- libwebsockets/CMakeLists.txt	2017-11-29 10:34:03.651466806 +0800
-+++ CMakeLists.txt	2017-11-29 10:28:05.000000000 +0800
-@@ -942,13 +942,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b2609694..d4a10942 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1152,13 +1152,13 @@ endif()
  
  # Set the so version of the lib.
  # Equivalent to LDFLAGS=-version-info x:x:x
@@ -20,4 +22,3 @@
 +# endif()
  
  set(LIB_LIST)
- 

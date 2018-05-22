@@ -20,7 +20,7 @@ ENV AS=/home/dev/arm64/bin/aarch64-linux-android-as
 ENV PLATFORM=android
 ENV CFLAGS="-D__ANDROID_API__=21"
 
-RUN sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y binutils cmake
+RUN sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y binutils cmake
 RUN /usr/local/android-ndk-r13b/build/tools/make_standalone_toolchain.py --arch arm64 --api 21 --stl gnustl --force --install-dir /home/dev/arm64
 COPY build.sh /home/dev/arm64/bin/build.sh
 COPY CMakeLists.txt.patch /home/dev/CMakeLists.txt.patch

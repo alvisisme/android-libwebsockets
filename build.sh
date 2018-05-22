@@ -2,9 +2,9 @@
 set -e
 
 [ ! -d libwebsockets ] && {
-git clone --branch v2.4.1 https://github.com/warmcat/libwebsockets.git
+git clone --branch v3.0.0 https://github.com/warmcat/libwebsockets.git
 cd libwebsockets
-patch -p0 < ../CMakeLists.txt.patch
+patch -p1 < ../CMakeLists.txt.patch
 cd ..
 }
 
