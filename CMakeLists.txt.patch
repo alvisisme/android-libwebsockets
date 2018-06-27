@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b2609694..d4a10942 100644
+index b2609694..74385d2c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1152,13 +1152,13 @@ endif()
@@ -13,12 +13,13 @@ index b2609694..d4a10942 100644
 -			SOVERSION ${SOVERSION})
 -	endforeach()
 -endif()
-+# if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
-+# 	foreach(lib ${LWS_LIBRARIES})
-+# 		set_target_properties(${lib}
-+# 			PROPERTIES
-+# 			SOVERSION ${SOVERSION})
-+# 	endforeach()
-+# endif()
++#if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
++#	foreach(lib ${LWS_LIBRARIES})
++#		set_target_properties(${lib}
++#			PROPERTIES
++#			SOVERSION ${SOVERSION})
++#	endforeach()
++#endif()
  
  set(LIB_LIST)
+ 

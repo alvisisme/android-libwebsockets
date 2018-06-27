@@ -4,7 +4,8 @@ set -e
 [ ! -d libwebsockets ] && {
 git clone --branch v3.0.0 https://github.com/warmcat/libwebsockets.git
 cd libwebsockets
-patch -p1 < ../CMakeLists.txt.patch
+mv /CMakeLists.txt.patch .
+git apply CMakeLists.txt.patch
 cd ..
 }
 
@@ -16,16 +17,16 @@ cd libwebsockets
 mkdir -p build
 cd build
 cmake \
-  -DCMAKE_INSTALL_PREFIX=/home/dev/out \
+  -DCMAKE_INSTALL_PREFIX=/home/out \
   -DLWS_WITHOUT_TESTAPPS=ON \
   -DLWS_WITH_SSL=OFF \
   -DLWS_WITH_LIBUV=ON \
-  -DLWS_ZLIB_LIBRARIES=/home/dev/arm64/sysroot/usr/lib/libz.a \
-  -DLWS_ZLIB_INCLUDE_DIRS=/home/dev/arm64/sysroot/usr/include \
-  -DLWS_LIBUV_LIBRARIES="/home/dev/arm64/lib/libuv.a" \
-  -DLWS_LIBUV_INCLUDE_DIRS="/home/dev/arm64/include/libuv" \
+  -DLWS_ZLIB_LIBRARIES="/thirdparty/zlib/arm64/lib/libz.a" \
+  -DLWS_ZLIB_INCLUDE_DIRS="/thirdparty/zlib/arm64/include" \
+  -DLWS_LIBUV_LIBRARIES="/thirdparty/libuv/arm64/lib/libuv.a" \
+  -DLWS_LIBUV_INCLUDE_DIRS="/thirdparty/libuv/arm64/include/libuv" \
   -DCMAKE_BUILD_TYPE=Debug \
   ..
 
 make
-sudo make install
+make install

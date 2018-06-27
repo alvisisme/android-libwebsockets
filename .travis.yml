@@ -1,0 +1,8 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - ddocker build -t android-libwebsockets-build .
+  - docker run --rm -v `pwd`/out:/home/out android-libwebsockets-build
