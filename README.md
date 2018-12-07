@@ -22,9 +22,7 @@
 
 ## 注意事项
 
-* Android平台不支持带版本号的so库,需要改动CMakeLists.txt,脚本通过补丁方式修改原始CMakeLists.txt
-
-  主要将CMakeLists.txt的如下语句注释
+* Android平台不支持带版本号的so库,需要改动CMakeLists.txt,主要将CMakeLists.txt的如下语句注释
 
   ```CMake
   if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))

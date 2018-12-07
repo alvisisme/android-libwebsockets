@@ -1,10 +1,8 @@
 FROM alvisisme/arm64-android-toolchain
+LABEL maintainer=alvis<alvisisme@163.com>
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends binutils cmake git patch
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends binutils cmake git patch
-
-COPY build.sh /build.sh
-COPY CMakeLists.txt.patch /CMakeLists.txt.patch
-COPY thirdparty /thirdparty
-
-VOLUME ["/home/out"]
-CMD ["/bin/bash", "/build.sh"]
+USER root
+WORKDIR /out
+VOLUME ["/out"]
+CMD ["/bin/bash", "/out/build.sh"]

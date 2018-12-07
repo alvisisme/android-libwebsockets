@@ -1,0 +1,9 @@
+version: '2'
+services:
+  android-build-libwebsockets:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: android-build-libwebsockets:v3.0.0
+    volumes:
+      - .:/out
