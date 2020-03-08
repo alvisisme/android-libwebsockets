@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e
+set -o nounset
+set -o errexit
 
 LWS_VERSION=3.0.0
 
@@ -8,7 +9,7 @@ mkdir -p $CWD/build
 
 cd $CWD/build
 if [ ! -f libwebsockets.tar.gz ];then
-wget https://codeload.github.com/warmcat/libwebsockets/tar.gz/v$LWS_VERSION -O libwebsockets.tar.gz
+wget https://github.com/warmcat/libwebsockets/archive/v${LWS_VERSION}.tar.gz -O libwebsockets.tar.gz
 fi
 
 if [ -d libwebsockets ];then
@@ -33,7 +34,5 @@ cmake \
   -DLWS_LIBUV_INCLUDE_DIRS="$CWD/thirdparty/libuv/arm64/include/libuv" \
   -DCMAKE_BUILD_TYPE=Debug \
   ..
-make
-make install
 
-cd $CWD
+make && make install
